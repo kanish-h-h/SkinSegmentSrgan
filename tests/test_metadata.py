@@ -1,4 +1,5 @@
 import sqlite3
+import os
 
 
 def test_metadata_tables():
