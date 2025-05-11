@@ -1,7 +1,6 @@
 # Data and models
 data/raw/
 data/processed/
-models/pretrained/
 models/trained/
 outputs/
 

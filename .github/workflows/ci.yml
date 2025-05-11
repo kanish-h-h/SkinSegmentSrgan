@@ -1,4 +1,4 @@
-name: SkinSegmentSrgan-CI
+name: CI-SkinSegmentSrgan
 
 on:
   pull_request:
@@ -29,4 +29,7 @@ jobs:
     - name: Verify critical imports
       run: |
         python -c "import tensorflow as tf; print('Imports OK')"
-        python -c "from huggingface_hub import hf_hub_download; print('HF Hub OK')"
+
+    - name: Run tests
+      run: |
+        python -m pytest tests/
