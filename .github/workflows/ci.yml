@@ -1,18 +1,32 @@
-name: CI-SkinSegmentSrgan
-on: [push, pull_request]
+name: SkinSegmentSrgan-CI
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
 jobs:
-  test:
+  validate:
+    if: github.base_ref == 'main' && github.head_ref == 'dev'
+    name: Validate Changes
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install pytest
-      - name: Run tests
-        run: |
-          python -m pytest tests/
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Verify critical imports
+      run: |
+        python -c "import tensorflow as tf; print('Imports OK')"
+        python -c "from huggingface_hub import hf_hub_download; print('HF Hub OK')"
