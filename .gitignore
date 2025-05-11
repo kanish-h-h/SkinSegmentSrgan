@@ -1,0 +1,28 @@
+# Data and models
+data/raw/
+data/processed/
+models/pretrained/
+models/trained/
+outputs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+.venv/
+venv/
+
+# Logs
+*.log
+*.sqlite
+
+# Colab
+.ipynb_checkpoints/
+
+# Exceptions (keep these)
+!.gitkeep

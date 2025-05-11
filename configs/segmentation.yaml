@@ -1,0 +1,6 @@
+input_shape: [256, 256, 3]
+batch_size: 16
+learning_rate: 1e-4
+loss: dice
+epochs: 50
+pretrained_weights: "models/pretrained/unet_medical.h5"
