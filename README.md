@@ -25,29 +25,29 @@ This pipeline is particularly useful for dermatologists and medical professional
 
 ### Prerequisites
 
-- Python 3.8+
+- Python 3.10
 - TensorFlow 2.10+
 - CUDA-compatible GPU (recommended for training)
 
 ### Setup
 
 1. Clone the repository:
-   \`\`\`bash
+   ```bash
    git clone https://github.com/yourusername/skinsegmentsrgan.git
    cd skinsegmentsrgan
-   \`\`\`
+   ```
 
 2. Install dependencies:
-   \`\`\`bash
+   ```bash
    pip install -r requirements.txt
-   \`\`\`
+   ```
 
 3. Create necessary directories:
-   \`\`\`bash
+   ```bash
    mkdir -p data/{raw,processed}/{segmentation,srgan}/{train,val,test}
    mkdir -p models/{segmentation,srgan}
    mkdir -p results/pipeline
-   \`\`\`
+   ```
 
 ## Data Preparation
 
@@ -55,7 +55,7 @@ This pipeline is particularly useful for dermatologists and medical professional
 
 The expected data directory structure is:
 
-\`\`\`
+```
 data/
 ├── raw/
 │   ├── segmentation/
@@ -85,48 +85,48 @@ data/
         └── test/
             ├── hr/
             └── lr/
-\`\`\`
+```
 
 ### Generating Segmentation Masks
 
 If you don't have ground truth masks for your skin disease images, you can generate them using our pre-trained model:
 
-\`\`\`bash
+```bash
 python -m src.data_processing.generate_masks
-\`\`\`
+```
 
 ### Preprocessing Data
 
 1. Preprocess segmentation data:
-   \`\`\`bash
+   ```bash
    python -m src.data_processing.preprocess_seg
-   \`\`\`
+   ```
 
 2. Preprocess SRGAN data:
-   \`\`\`bash
+   ```bash
    python -m src.data_processing.preprocess_srgan
-   \`\`\`
+   ```
 
 3. Update metadata database:
-   \`\`\`bash
+   ```bash
    python -m src.utils.logger
-   \`\`\`
+   ```
 
 ## Model Training
 
 ### Training the Segmentation Model
 
-\`\`\`bash
+```bash
 python -m src.training.seg_train
-\`\`\`
+```
 
 Configuration options can be modified in `configs/segmentation.yaml`.
 
 ### Training the SRGAN Model
 
-\`\`\`bash
+```bash
 python -m src.training.srgan_train
-\`\`\`
+```
 
 Configuration options can be modified in `configs/srgan.yaml`.
 
@@ -135,23 +135,23 @@ Configuration options can be modified in `configs/srgan.yaml`.
 ### Using the Command-Line Interface
 
 Process a single image:
-\`\`\`bash
-PYTHONPATH=. python src/inference/cli.py -i samples/metrics/0161/0161.png   --seg-model models/v2/v2_models/final_model.h5   --srgan-model models/v2/v2_models/generator_epoch_100.h5   -o results/inference_results
-\`\`\`
+```bash
+PYTHONPATH=. python src/inference/cli.py -i samples/metrics/0161/0161.png   --seg-model models/final_model.h5   --srgan-model models/generator_epoch_100.h5   -o results/inference_results
+```
 
 Process all images in a directory:
-\`\`\`bash
+```bash
 python -m src.inference.cli --directory path/to/images/
-\`\`\`
+```
 
 ### Using the Shell Script
 
-\`\`\`bash
+```bash
 ./scripts/run_inference.sh --input data/raw/test_images
-\`\`\`
+```
 
 Additional options:
-\`\`\`
+```
 Usage: ./scripts/run_inference.sh [OPTIONS]
 Run the skin disease segmentation + SRGAN pipeline on test images.
 
@@ -161,7 +161,7 @@ Options:
   -g, --srgan-model PATH Path to SRGAN generator model weights
   -o, --output DIR     Output directory for results
   -h, --help           Show this help message
-\`\`\`
+```
 
 ## Results
 
@@ -190,6 +190,9 @@ We evaluate our models using the following metrics:
 - Structural Similarity Index (SSIM)
 - Perceptual quality assessment
 
+![Sample Result of v2](results/0000_results.png)
+
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
@@ -202,14 +205,14 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 If you use this code for your research, please cite our paper:
 
-\`\`\`
+```
 @article{author2023skinsegmentsrgan,
   title={SkinSegmentSRGAN: A Combined Segmentation and Super-Resolution Approach for Enhanced Visualization of Skin Disease Images},
   author={Author, A. and Researcher, B.},
   journal={Journal of Medical Imaging},
   year={2023}
 }
-\`\`\`
+```
 
 ## Acknowledgments
 
