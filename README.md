@@ -37,6 +37,11 @@ This pipeline is particularly useful for dermatologists and medical professional
    cd skinsegmentsrgan
    ```
 
+   Create Virtual environment:
+   ```bash
+   python3.10 -m venv venv
+   ```
+
 2. Install dependencies:
    ```bash
    pip install -r requirements.txt
@@ -190,7 +195,7 @@ We evaluate our models using the following metrics:
 - Structural Similarity Index (SSIM)
 - Perceptual quality assessment
 
-![Sample Result of v2](results/0000_results.png)
+![Sample Result of v2](results/pipeline/0000_results.png)
 
 
 ## Contributing
